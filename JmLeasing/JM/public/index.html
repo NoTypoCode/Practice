@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JM Credit Card</title>
+    <style>
+        body {
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #logo {
+            position: absolute;
+            top: 10px;
+            left: 3%;
+            width: 200px;
+
+        }
+
+        form {
+            background-color: aliceblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            padding: 20px;
+            border: 5px ridge greenyellow;
+            box-shadow: 10px 10px black;
+            border-radius: 5px;
+        }
+
+        #CardSelector,
+        #Dealer {
+            text-align: center;
+            margin: 5px;
+        }
+
+        #pdfButton {
+            margin: 10px;
+        }
+
+        #firstoption {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="images/image001.png" alt="JM Auto" id="logo">
+    <form name="theForm">
+        <select name="CardSelector" id="CardSelector">
+            <option id="firstoption">Select Credit Card</option>
+        </select>
+
+        <select name="Dealer" id="Dealer">
+            <option value="firstoption">Select Dealer</option>
+        </select>
+        <label for="name">Customer: </label>
+        <input type="text" name="name" id="name" value="David">
+        <label for="amount">Amount paid: </label>
+        <input type="number" name="amount" id="amount" value="2000">
+        <div>
+            <button type="submit" form="theForm" id="pdfButton">Export to PDF</button>
+        </div>
+    </form>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+    integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+    crossorigin="anonymous"></script>
+
+<script src="index.js"></script>
+
+</html>
