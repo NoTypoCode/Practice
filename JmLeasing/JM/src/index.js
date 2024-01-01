@@ -11,8 +11,7 @@ const contractSchema = z.object({
     dealer: z.string(),
     creditCard: z.string(),
     amount: z.number()
-
-})
+});
 
 app.use(express.json());
 app.use(express.static('public'))

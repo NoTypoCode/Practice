@@ -1,14 +1,15 @@
 (() => {
-
+    const theForm = document.getElementById('theForm');
     const cardDropdown = document.getElementById('CardSelector');
     const dealerDropdown = document.getElementById('Dealer');
     const pdfButton = document.getElementById('pdfButton');
     const amount = document.getElementById('amount');
+    const customer = document.getElementById('name')
 
 
     //options for the dropdown
     const creditcards = ['Amex', 'Visa', 'MasterCard', 'Discover'];
-    const dealerships = ['Jeep', 'Lexsus', 'Mercedes', 'Toyota', 'Honda', 'Hyundai', 'Mazda'];
+    const dealerships = ['Jeep', 'Lexus', 'Mercedes', 'Toyota', 'Honda', 'Hyundai', 'Mazda'];
 
     //get the date for the pdf later on
     const today = new Date().toLocaleDateString('en-US', { month: "long", day: "numeric", year: "numeric" }).replace(',', '');
@@ -36,11 +37,11 @@
     pdfButton.addEventListener('click', async (e) => {
         e.preventDefault();
 
-        //using the backend of the app
-        await fetch('send-message', {
+        //using the backend of the app 
+        await fetch('/send-message', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 customer: document.getElementById('name').value,
@@ -50,7 +51,7 @@
             })
         });
 
-        console.log(`We have used the ${data.selectedCreditCard} to pay ${data.selectedDealership} $${amount.value} for ${document.getElementById('name').value}`);
+        console.log(`We have used the ${data.selectedCreditCard} to pay ${data.selectedDealership} $${amount.value} for ${customer.value}`);
 
         //get the logo for the top of the pdf
         const img = new Image();
@@ -63,17 +64,23 @@
         newPDF.setFontType("bold").text(`${companyname}`, 165, 30, 'center')
         newPDF.setFontType('normal').setFontSize(12).text(`\n109 Ave M\nBrooklyn, NY 11230\n\nPh: 718 - 627 - 7100\nFx: 718 - 627 - 8855`, 165, 30, 'center');
 
-        //write the text in the middle of the page
-        //everything is coming on top of each other...have to figure out how to do layout properly
+        //I should write the text in the middle of the page       
+        newPDF.text(`We have used the ${data.selectedCreditCard} to pay ${data.selectedDealership} $${amount.value} for ${customer.value}'s car`, 10, 70);
 
-        newPDF.text(`We have used the ${data.selectedCreditCard} to pay ${data.selectedDealership} $${document.getElementById('amount').value} for ${document.getElementById('name').value}'s car`, 10, 70);
-        newPDF.output('dataurlnewwindow')
-        //newPDF.save(`${document.getElementById('name')} ${today}.pdf`)
+        newPDF.output('dataurlnewwindow');
+
+        //newPDF.save(`${document.getElementById('name')} ${today}.pdf`);
+
+        
+        //reset the pdf to be empty for the next customer input
+        newPDF = new jsPDF();
+
+        //reset the form to blank so that can start over
+        customer.value = '';
+        amount.value = '';
+        theForm.reset();
 
 
-        //clear out the form
-        //blackboxgave this code have to see if it works
-        document.querySelectorAll('.formInput').forEach((item) => item.reset());
     })
 
 
