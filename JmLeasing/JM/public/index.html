@@ -5,74 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JM Credit Card</title>
-    <style>
-        body {
-            background-color: gray;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        #logo {
-            position: absolute;
-            top: 10px;
-            left: 3%;
-            width: 200px;
-
-        }
-
-        form {
-            background-color: aliceblue;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 50%;
-            padding: 20px;
-            border: 5px ridge greenyellow;
-            box-shadow: 10px 10px black;
-            border-radius: 5px;
-        }
-
-        #CardSelector,
-        #Dealer {
-            text-align: center;
-            margin: 5px;
-        }
-
-        #pdfButton {
-            margin: 10px;
-        }
-
-        .firstoption {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>
 
     <img src="images/image001.png" alt="JM Auto" id="logo">
-    <form name="theForm"  id="theForm">
+
+    <div id="authpage">
+        <form id="auth">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username"><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password"><br>
+            <button id="login">Sign in</button>
+        </form>
+    </div>
+    <form name="theForm" id="theForm">
+
+        <label for="name">Customer: </label>
+        <input type="text" name="name" id="name">
+
+        <label for="amount">Amount to be paid: </label>
+        <input type="number" name="amount" id="amount">
+
+
+        <label for="cardnumber"> Card Number: </label>
+        <input type="text" name="cardnumber" id="cardnumber">
+
+        <div class="sameline">
+            <label for="exp">Expiration Date: </label>
+            <input type="text" name="exp" id="exp">
+
+            <label for="cvv">CVV:</label>
+            <input type="text" name="cvv" id="cvv">
+        </div>
 
         <select name="CardSelector" id="CardSelector">
             <option class="firstoption">Select Credit Card</option>
-        </select>
+        </select><br>
+
+        <div class="sameline">
+            <label for="street">Address: </label>
+            <input type="text" name="street" id="address">
+
+            <label for="city">City: </label>
+            <input type="text" name="city" id="city">
+
+            <select name="state" id="state">
+                <option class="firstoption"> State </option>
+            </select>
+
+            <label for="zip">Zip</label>
+            <input type="text" name="zip" id="zip">
+        </div>
 
         <select name="Dealer" id="Dealer">
             <option class="firstoption">Select Dealer</option>
         </select>
 
-        <label for="name">Customer: </label>
-        <input type="text" name="name" id="name" >
 
-        <label for="amount">Amount paid: </label>
-        <input type="number" name="amount" id="amount" >
 
-        <div>
-            <button type="submit" form="theForm" id="pdfButton">Export to PDF</button>
-        </div>
+        <button type="submit" form="theForm" id="pdfButton" disabled>Export to PDF</button>
 
     </form>
 

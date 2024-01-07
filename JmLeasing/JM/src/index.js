@@ -6,7 +6,6 @@ import sheets, { SHEET_ID } from './sheets.js';
 const app = express();
 
 const contractSchema = z.object({
-    date: z.number(),
     name: z.string().min(1, { message: "name is required" }),
     dealer: z.string(),
     creditCard: z.string(),
@@ -16,7 +15,7 @@ const contractSchema = z.object({
 app.use(express.json());
 app.use(express.static('public'))
 
-app.post('/send-message', async (req, res) => {
+app.post('/leaser', async (req, res) => {
     try {
         const body = contractSchema.parse(req.body);
 
@@ -27,8 +26,8 @@ app.post('/send-message', async (req, res) => {
 
         await sheets.spreadsheets.values.append({
             spreadsheetId: SHEET_ID,
-            range: 'Data!A:E',
-            insertDataOption: 'INSERT_ROWS',
+            range: 'Data!A:D',
+            insertDataOption: 'OVERWRITE',
             valueInputOption: 'RAW',
             requestBody: {
                 values: [rows]
